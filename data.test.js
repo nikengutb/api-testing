@@ -9,52 +9,35 @@ describe('Retrieving data for country Sweden', () => {
             .expectStatus(200)
     });
 
-    test('should yield Content-Type header containing value "application/json"', async () => {
+    test('Should yield Content-Type header containing value "application/json"', async () => {
 
         await pactum.spec()
-            .get('http://jsonplaceholder.typicode.com/users/1')
+            .get('https://restcountries.com/v3.1/name/sweden?fullText=true')
             .expectHeaderContains('content-type', 'application/json')
     });
 
-    test('should yield "name" JSON body element with value "Leanne Graham"', async () => {
+    test('Should yield "Kingdom of Sweden" as the official name within the name', async () => {
 
         await pactum.spec()
-            .get('http://jsonplaceholder.typicode.com/users/1')
-            .expectJsonMatch('name', 'Leanne Graham')
+            .get('https://restcountries.com/v3.1/name/sweden?fullText=true')
+            .expectJsonMatch('0.name.official', 'Kingdom of Sweden')
     });
 
-    test('should yield "Gwenborough" as the city within the address', async () => {
+    test('Should yield ".se" as the TLD', async () => {
 
         await pactum.spec()
-            .get('http://jsonplaceholder.typicode.com/users/1')
-            .expectJsonMatch('address.city', 'Gwenborough')
+            .get('https://restcountries.com/v3.1/name/sweden?fullText=true')
+            .expectJsonMatch('0.tld.0', '.se')
     });
 
 });
 
-describe('Retrieving all user data', () => {
+describe('Retrieving all countries', () => {
 
-    test('should yield a list of 10 users', async () => {
-
-        await pactum.spec()
-            .get('http://jsonplaceholder.typicode.com/users')
-            .expectJsonLength(10)
-    });
-});
-
-describe('Posting a new post item', () => {
-
-    test('should yield HTTP status code 201', async () => {
-
-        let new_post = {
-            "title": "My awesome new post title",
-            "body": "My awesome new post body",
-            "userId": 1
-        }
+    test('Should yield a list of 250 countries', async () => {
 
         await pactum.spec()
-            .post('http://jsonplaceholder.typicode.com/posts')
-            .withJson(new_post)
-            .expectStatus(201)
+            .get('https://restcountries.com/v3.1/all')
+            .expectJsonLength(250)
     });
 });
