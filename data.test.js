@@ -1,11 +1,11 @@
 const pactum = require('pactum');
 
-describe('Retrieving data for user with ID 1', () => {
+describe('Retrieving data for country Sweden', () => {
 
-    test('should yield HTTP status code 200', async () => {
+    test('Should yield HTTP status code 200', async () => {
 
         await pactum.spec()
-            .get('http://jsonplaceholder.typicode.com/users/1')
+            .get('https://restcountries.com/v3.1/name/sweden?fullText=true')
             .expectStatus(200)
     });
 
