@@ -23,7 +23,7 @@ describe('Retrieving data for country Sweden', () => {
             .expectJsonMatch('0.name.official', 'Kingdom of Sweden')
     });
 
-    test('Should yield ".se" as the TLD', async () => {
+    test('Should yield ".se" as the TLD (top level domain)', async () => {
 
         await pactum.spec()
             .get('https://restcountries.com/v3.1/name/sweden?fullText=true')
