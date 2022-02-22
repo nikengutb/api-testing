@@ -1,6 +1,6 @@
 const pactum = require('pactum');
 
-describe('Retrieving data for country Sweden', () => {
+describe('Retrieving custom data from restcountries API', () => {
 
     test('Should yield HTTP status code 200', async () => {
 
