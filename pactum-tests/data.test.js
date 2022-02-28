@@ -9,6 +9,13 @@ describe('Retrieving custom data from restcountries API', () => {
             .expectStatus(200)
     });
 
+    test('Should yield HTTP status code 404', async () => {
+
+        await pactum.spec()
+            .get('https://restcountries.com/v3.1/sweden?fullText=true')
+            .expectStatus(404)
+    });
+
     test('Should yield Content-Type header containing value "application/json"', async () => {
 
         await pactum.spec()
