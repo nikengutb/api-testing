@@ -37,6 +37,13 @@ describe('Retrieving custom data from restcountries API', () => {
             .expectJsonMatch('0.tld.0', '.se')
     });
 
+    test('Should yield "Stockholm" as the capital of Sweden', async () => {
+
+        await pactum.spec()
+            .get('https://restcountries.com/v3.1/name/sweden?fullText=true')
+            .expectJsonMatch('0.capital.0', 'Stockholm')
+    });
+
 });
 
 describe('Retrieving all countries', () => {
